@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Baking</string>
+    <string name="desc_cover_imageview">Cover for this recipe</string>
+    <string name="desc_step_recipe">How much steps this recipe will cost</string>
 </resources>
