@@ -29,57 +29,61 @@ import io.reactivex.schedulers.Schedulers;
  * @Date 2018/1/24.
  * @Time 上午10:23.
  */
+
 public class RecipesFragment extends BaseFragment {
 
-	private RecyclerView mRvRecipe;
-	private TextView mTvEmptyView;
-	private SwipeRefreshLayout mSRLRecipe;
-	private RecipeItemAdapter mRecipeItemAdapter;
+    private RecyclerView mRvRecipe;
+    private TextView mTvEmptyView;
+    private SwipeRefreshLayout mSRLRecipe;
+    private RecipeItemAdapter mRecipeItemAdapter;
 
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
 
-		super.onCreate(savedInstanceState);
-		mDisposable = NetWork.getBakingApi().getBakingStaffs().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-						.subscribe(new Consumer<List<RecipeBean>>() {
-							@Override
-							public void accept(List<RecipeBean> bakingBeans) throws Exception {
+        super.onCreate(savedInstanceState);
+        mDisposable = NetWork.getBakingApi()
+                .getBakingStaffs()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<RecipeBean>>() {
+                    @Override
+                    public void accept(List<RecipeBean> bakingBeans) throws Exception {
 
-								mRecipeItemAdapter.setRecipeBeanList(bakingBeans);
-								Logger.d(bakingBeans.get(0).getIngredients());
-							}
-						}, new Consumer<Throwable>() {
-							@Override
-							public void accept(@NonNull Throwable throwable) throws Exception {
+                        mRecipeItemAdapter.setRecipeBeanList(bakingBeans);
+                        Logger.d(bakingBeans.get(0).getIngredients());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
 
-								Toast.makeText(getActivity(), R.string.loading_failed, Toast.LENGTH_SHORT).show();
-								Logger.e(throwable.getMessage());
-							}
-						});
-	}
+                        Toast.makeText(getActivity(), R.string.loading_failed, Toast.LENGTH_SHORT).show();
+                        Logger.e(throwable.getMessage());
+                    }
+                });
+    }
 
-	@Nullable
-	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.fragment_main, container);
+        View view = inflater.inflate(R.layout.fragment_main, container);
 
-		// 找到控件
-		mRvRecipe = view.findViewById(R.id.rv_recipe);
-		mTvEmptyView = view.findViewById(R.id.tv_empty_view);
-		mSRLRecipe = view.findViewById(R.id.srl_recipe);
+        // 找到控件
+        mRvRecipe = view.findViewById(R.id.rv_recipe);
+        mTvEmptyView = view.findViewById(R.id.tv_empty_view);
+        mSRLRecipe = view.findViewById(R.id.srl_recipe);
 
-		// 设置布局管理器
-		mRvRecipe.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-		// 创建适配器并设置给rv
-		mRecipeItemAdapter = new RecipeItemAdapter();
-		mRvRecipe.setAdapter(mRecipeItemAdapter);
+        // 设置布局管理器
+        mRvRecipe.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
+        // 创建适配器并设置给rv
+        mRecipeItemAdapter = new RecipeItemAdapter();
+        mRvRecipe.setAdapter(mRecipeItemAdapter);
 
-		return view;
-	}
+        return view;
+    }
 
-	@Override
-	protected int getTitleRes() {
-		return 0;
-	}
+    @Override
+    protected int getTitleRes() {
+        return 0;
+    }
 }

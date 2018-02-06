@@ -4,7 +4,6 @@
     <option name="projectSpecificProfile">
       <ProjectSpecificProfile>
         <option name="enableJSFormatting" value="true" />
-        <option name="formatter" value="ECLIPSE" />
         <option name="pathToConfigFileJS" value="$PROJECT_DIR$/../Javaformat.xml" />
         <option name="pathToConfigFileJava" value="$PROJECT_DIR$/../Javaformat.xml" />
         <option name="selectedJavaProfile" value="Eclipse [mybuilt-in]" />
