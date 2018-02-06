@@ -9,6 +9,7 @@ import io.reactivex.disposables.Disposable;
  * @Date 2018/1/26.
  * @Time 下午3:40.
  */
+
 public abstract class BaseFragment extends Fragment {
 
 	protected Disposable mDisposable;

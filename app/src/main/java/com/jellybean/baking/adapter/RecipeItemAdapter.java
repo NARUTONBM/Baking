@@ -54,6 +54,11 @@ public class RecipeItemAdapter extends RecyclerView.Adapter {
 		return mRecipeBeanList == null ? 0 : mRecipeBeanList.size();
 	}
 
+	public void setRecipeBeanList(List<RecipeBean> recipeBeanList) {
+
+		mRecipeBeanList = recipeBeanList;
+	}
+
 	private class RecipeViewHolder extends RecyclerView.ViewHolder {
 
 		private final ImageView mIvCover;

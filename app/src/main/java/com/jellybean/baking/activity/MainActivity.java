@@ -1,7 +1,8 @@
 package com.jellybean.baking.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.jellybean.baking.R;
 
@@ -16,5 +17,13 @@ public class MainActivity extends AppCompatActivity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		initUI();
+	}
+
+	private void initUI() {
+
+		Toolbar toolbar = findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
 	}
 }

@@ -1,6 +1,6 @@
 package com.jellybean.baking.network.api;
 
-import com.jellybean.baking.bean.BakingBean;
+import com.jellybean.baking.bean.RecipeBean;
 
 import java.util.List;
 
@@ -22,5 +22,5 @@ public interface BakingApi {
 	 * @return 返回烘焙菜谱及具体步骤
 	 */
 	@GET("nd801/ProjectResources/Baking/baking-cn.json")
-	Observable<List<BakingBean>> getBakingStaffs();
+	Observable<List<RecipeBean>> getBakingStaffs();
 }

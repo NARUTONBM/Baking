@@ -20,6 +20,7 @@ public class MyApplication extends Application {
 
 		super.onCreate();
 		Logger.addLogAdapter(new AndroidLogAdapter());
+		this.mContext = getApplicationContext();
 	}
 
 	/**
@@ -28,8 +29,6 @@ public class MyApplication extends Application {
 	 * @return 返回当前的context
 	 */
 	public Context getContext() {
-
-		this.mContext = getApplicationContext();
 
 		return mContext;
 	}
