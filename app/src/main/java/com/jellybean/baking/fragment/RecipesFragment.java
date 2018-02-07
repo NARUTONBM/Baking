@@ -1,5 +1,6 @@
 package com.jellybean.baking.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,6 +16,8 @@ import com.jellybean.baking.R;
 import com.jellybean.baking.adapter.RecipeItemAdapter;
 import com.jellybean.baking.bean.RecipeBean;
 import com.jellybean.baking.network.NetWork;
+import com.jellybean.baking.utils.Utils;
+import com.jude.easyrecyclerview.decoration.SpaceDecoration;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
@@ -35,7 +38,7 @@ public class RecipesFragment extends BaseFragment {
     private RecyclerView mRvRecipe;
     private TextView mTvEmptyView;
     private SwipeRefreshLayout mSRLRecipe;
-    private RecipeItemAdapter mRecipeItemAdapter;
+    private RecipeItemAdapter mRecipeItemAdapter = new RecipeItemAdapter();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +53,6 @@ public class RecipesFragment extends BaseFragment {
                     public void accept(List<RecipeBean> bakingBeans) throws Exception {
 
                         mRecipeItemAdapter.setRecipeBeanList(bakingBeans);
-                        Logger.d(bakingBeans.get(0).getIngredients());
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -74,16 +76,19 @@ public class RecipesFragment extends BaseFragment {
         mSRLRecipe = view.findViewById(R.id.srl_recipe);
 
         // 设置布局管理器
-        mRvRecipe.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        // 创建适配器并设置给rv
-        mRecipeItemAdapter = new RecipeItemAdapter();
+        StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+		gridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+		mRvRecipe.setLayoutManager(gridLayoutManager);
+		// 设置边距
+		SpaceDecoration itemDecoration = new SpaceDecoration((int) Utils.convertDpToPixel(8, getContext()));
+		itemDecoration.setPaddingEdgeSide(true);
+		itemDecoration.setPaddingStart(true);
+		mRvRecipe.addItemDecoration(itemDecoration);
+        // 将适配器设置给rv
         mRvRecipe.setAdapter(mRecipeItemAdapter);
+        mSRLRecipe.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);
+        mSRLRecipe.setEnabled(false);
 
         return view;
-    }
-
-    @Override
-    protected int getTitleRes() {
-        return 0;
     }
 }

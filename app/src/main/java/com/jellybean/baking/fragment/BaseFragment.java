@@ -28,6 +28,4 @@ public abstract class BaseFragment extends Fragment {
 			mDisposable.dispose();
 		}
 	}
-
-	protected abstract int getTitleRes();
 }

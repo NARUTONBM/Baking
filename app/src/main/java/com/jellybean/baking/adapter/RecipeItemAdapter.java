@@ -1,6 +1,5 @@
 package com.jellybean.baking.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jellybean.baking.MyApplication;
 import com.jellybean.baking.R;
 import com.jellybean.baking.bean.RecipeBean;
 
@@ -22,55 +20,55 @@ import java.util.List;
  */
 public class RecipeItemAdapter extends RecyclerView.Adapter {
 
-	private Context mContext = new MyApplication().getContext();
-	List<RecipeBean> mRecipeBeanList;
-	List<Integer> mNameList = new ArrayList<Integer>();
+    List<RecipeBean> mRecipeBeanList;
+    List<Integer> mNameList = new ArrayList<Integer>();
 
-	@Override
-	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-		View view = LayoutInflater.from(mContext).inflate(R.layout.recipe_item, parent, false);
-		mNameList.add(0, R.mipmap.cover_nutella_pie);
-		mNameList.add(1, R.mipmap.cover_brownies);
-		mNameList.add(2, R.mipmap.cover_yellow_cake);
-		mNameList.add(3, R.mipmap.cover_cheesecake);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_item, parent, false);
+        mNameList.add(0, R.mipmap.cover_nutella_pie);
+        mNameList.add(1, R.mipmap.cover_brownies);
+        mNameList.add(2, R.mipmap.cover_yellow_cake);
+        mNameList.add(3, R.mipmap.cover_cheesecake);
 
-		return new RecipeViewHolder(view);
-	}
+        return new RecipeViewHolder(view);
+    }
 
-	@Override
-	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-		RecipeViewHolder recipeViewHolder = (RecipeViewHolder) holder;
-		RecipeBean recipeBean = mRecipeBeanList.get(position);
-		recipeViewHolder.mIvCover.setImageResource(mNameList.get(position));
-		recipeViewHolder.mTvRecipeName.setText(recipeBean.getName());
-		recipeViewHolder.mTvRecipeStep.setText(recipeBean.getSteps().size());
-	}
+        RecipeViewHolder recipeViewHolder = (RecipeViewHolder) holder;
+        RecipeBean recipeBean = mRecipeBeanList.get(position);
+        recipeViewHolder.mIvCover.setImageResource(mNameList.get(position));
+        recipeViewHolder.mTvRecipeName.setText(recipeBean.getName());
+        recipeViewHolder.mTvRecipeStep.setText(String.valueOf(recipeBean.getSteps().size()));
+    }
 
-	@Override
-	public int getItemCount() {
+    @Override
+    public int getItemCount() {
 
-		return mRecipeBeanList == null ? 0 : mRecipeBeanList.size();
-	}
+        return mRecipeBeanList == null ? 0 : mRecipeBeanList.size();
+    }
 
-	public void setRecipeBeanList(List<RecipeBean> recipeBeanList) {
+    public void setRecipeBeanList(List<RecipeBean> recipeBeanList) {
 
-		mRecipeBeanList = recipeBeanList;
-	}
+        mRecipeBeanList = recipeBeanList;
+        notifyDataSetChanged();
+    }
 
-	private class RecipeViewHolder extends RecyclerView.ViewHolder {
+    private class RecipeViewHolder extends RecyclerView.ViewHolder {
 
-		private final ImageView mIvCover;
-		private final TextView mTvRecipeName;
-		private final TextView mTvRecipeStep;
+        private final ImageView mIvCover;
+        private final TextView mTvRecipeName;
+        private final TextView mTvRecipeStep;
 
-		public RecipeViewHolder(View view) {
+        RecipeViewHolder(View view) {
 
-			super(view);
-			mIvCover = view.findViewById(R.id.iv_cover);
-			mTvRecipeName = view.findViewById(R.id.tv_recipe_name);
-			mTvRecipeStep = view.findViewById(R.id.tv_recipe_step);
-		}
-	}
+            super(view);
+            mIvCover = view.findViewById(R.id.iv_cover);
+            mTvRecipeName = view.findViewById(R.id.tv_recipe_name);
+            mTvRecipeStep = view.findViewById(R.id.tv_recipe_step);
+        }
+    }
 }

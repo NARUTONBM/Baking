@@ -22,18 +22,13 @@
             app:titleTextColor="@android:color/white"/>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <fragment
+        android:id="@+id/fragment_recipe"
+        android:name="com.jellybean.baking.fragment.RecipesFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <fragment
-            android:id="@+id/fragment_recipe"
-            android:name="com.jellybean.baking.fragment.RecipesFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            tools:context="com.jellybean.baking.fragment.RecipesFragment"
-            tools:layout="@layout/fragment_main"/>
-    </android.support.v4.widget.NestedScrollView>
+        android:fitsSystemWindows="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.jellybean.baking.fragment.RecipesFragment"
+        tools:layout="@layout/fragment_main"/>
 </android.support.design.widget.CoordinatorLayout>
