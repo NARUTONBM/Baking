@@ -33,9 +33,8 @@ import io.reactivex.schedulers.Schedulers;
  * @Time 上午10:23.
  */
 
-public class RecipesFragment extends BaseFragment {
+public class RecipesFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private RecyclerView mRvRecipe;
     private TextView mTvEmptyView;
     private SwipeRefreshLayout mSRLRecipe;
     private RecipeItemAdapter mRecipeItemAdapter = new RecipeItemAdapter();
@@ -44,24 +43,7 @@ public class RecipesFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        mDisposable = NetWork.getBakingApi()
-                .getBakingStaffs()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<RecipeBean>>() {
-                    @Override
-                    public void accept(List<RecipeBean> bakingBeans) throws Exception {
-
-                        mRecipeItemAdapter.setRecipeBeanList(bakingBeans);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(@NonNull Throwable throwable) throws Exception {
-
-                        Toast.makeText(getActivity(), R.string.loading_failed, Toast.LENGTH_SHORT).show();
-                        Logger.e(throwable.getMessage());
-                    }
-                });
+        refreshData();
     }
 
     @Nullable
@@ -71,24 +53,62 @@ public class RecipesFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_main, container);
 
         // 找到控件
-        mRvRecipe = view.findViewById(R.id.rv_recipe);
+        RecyclerView rvRecipe = view.findViewById(R.id.rv_recipe);
         mTvEmptyView = view.findViewById(R.id.tv_empty_view);
+        mTvEmptyView.setVisibility(View.GONE);
         mSRLRecipe = view.findViewById(R.id.srl_recipe);
+        mSRLRecipe.setRefreshing(true);
 
         // 设置布局管理器
         StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
-		gridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-		mRvRecipe.setLayoutManager(gridLayoutManager);
-		// 设置边距
-		SpaceDecoration itemDecoration = new SpaceDecoration((int) Utils.convertDpToPixel(8, getContext()));
-		itemDecoration.setPaddingEdgeSide(true);
-		itemDecoration.setPaddingStart(true);
-		mRvRecipe.addItemDecoration(itemDecoration);
+        gridLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        rvRecipe.setLayoutManager(gridLayoutManager);
+        // 设置边距
+        SpaceDecoration itemDecoration = new SpaceDecoration((int) Utils.convertDpToPixel(8, getContext()));
+        itemDecoration.setPaddingEdgeSide(true);
+        itemDecoration.setPaddingStart(true);
+        rvRecipe.addItemDecoration(itemDecoration);
         // 将适配器设置给rv
-        mRvRecipe.setAdapter(mRecipeItemAdapter);
+        rvRecipe.setAdapter(mRecipeItemAdapter);
         mSRLRecipe.setColorSchemeColors(Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW);
-        mSRLRecipe.setEnabled(false);
+        mSRLRecipe.setOnRefreshListener(this);
+        mSRLRecipe.setEnabled(true);
 
         return view;
+    }
+
+    @Override
+    public void onRefresh() {
+
+        mSRLRecipe.setRefreshing(true);
+        refreshData();
+    }
+
+    /**
+     * 刷新网络数据的方法
+     */
+    private void refreshData() {
+
+        mDisposable = NetWork.getBakingApi()
+                .getBakingStaffs()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<RecipeBean>>() {
+                    @Override
+                    public void accept(List<RecipeBean> bakingBeans) throws Exception {
+
+                        mRecipeItemAdapter.setRecipeBeanList(bakingBeans);
+                        mSRLRecipe.setRefreshing(false);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+
+                        mTvEmptyView.setVisibility(View.VISIBLE);
+                        mTvEmptyView.setText(R.string.res_tv_empty);
+                        Toast.makeText(getActivity(), R.string.loading_failed, Toast.LENGTH_SHORT).show();
+                        Logger.e(throwable.getMessage());
+                    }
+                });
     }
 }

@@ -3,4 +3,5 @@
     <string name="desc_cover_imageview">Cover for this recipe</string>
     <string name="desc_step_recipe">How much steps this recipe will cost</string>
     <string name="loading_failed">加载失败</string>
+    <string name="res_tv_empty">Please try later again</string>
 </resources>
