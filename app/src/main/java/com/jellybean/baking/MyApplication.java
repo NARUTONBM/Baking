@@ -13,14 +13,14 @@ import com.orhanobut.logger.Logger;
  */
 public class MyApplication extends Application {
 
-	private Context mContext;
+	private static Context mContext;
 
 	@Override
 	public void onCreate() {
 
 		super.onCreate();
 		Logger.addLogAdapter(new AndroidLogAdapter());
-		this.mContext = getApplicationContext();
+		mContext = getApplicationContext();
 	}
 
 	/**
@@ -28,7 +28,7 @@ public class MyApplication extends Application {
 	 *
 	 * @return 返回当前的context
 	 */
-	public Context getContext() {
+	public static Context getContext() {
 
 		return mContext;
 	}

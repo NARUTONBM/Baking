@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_ingredient_head_container"
+        style="@style/ViewMarginTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_ingredient_head_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@mipmap/ic_ingredient_weight"
+                android:drawableRight="@mipmap/ic_ingredient_weight"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                tools:text="@string/text_tv_head_ingredient"/>
+        </RelativeLayout>
+
+        <!--做个添加购物车？先预留吧-->
+        <TextView
+            android:id="@+id/tv_ingredient_head_weight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:visibility="invisible"
+            tools:text="@string/text_tv_ingredient_weight"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_splitter_head_ingredient"
+        style="@style/ViewMarginTop"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:contentDescription="@string/desc_block_splitter"
+        android:src="@drawable/bg_line_rectangle_point_five"
+        app:layout_constraintTop_toBottomOf="@id/ll_ingredient_head_container"/>
+
+</android.support.constraint.ConstraintLayout>

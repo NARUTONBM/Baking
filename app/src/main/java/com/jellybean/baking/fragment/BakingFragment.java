@@ -28,12 +28,14 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
+ * 软件主页面
+ *
  * @author jellybean.
  * @Date 2018/1/24.
  * @Time 上午10:23.
  */
 
-public class RecipesFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class BakingFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, RecipeItemAdapter.OnRecyclerViewItemClickListener {
 
     private TextView mTvEmptyView;
     private SwipeRefreshLayout mSRLRecipe;
@@ -74,6 +76,8 @@ public class RecipesFragment extends BaseFragment implements SwipeRefreshLayout.
         mSRLRecipe.setOnRefreshListener(this);
         mSRLRecipe.setEnabled(true);
 
+        mRecipeItemAdapter.setOnItemClickListener(this);
+
         return view;
     }
 
@@ -110,5 +114,10 @@ public class RecipesFragment extends BaseFragment implements SwipeRefreshLayout.
                         Logger.e(throwable.getMessage());
                     }
                 });
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+
     }
 }

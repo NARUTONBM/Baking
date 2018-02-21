@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">Baking</string>
+    <string name="desc_block_splitter">block splitter</string>
     <string name="desc_cover_imageview">Cover for this recipe</string>
     <string name="desc_step_recipe">How much steps this recipe will cost</string>
     <string name="loading_failed">加载失败</string>
     <string name="res_tv_empty">Please try later again</string>
+    <string name="text_tv_ingredient_name">用料名</string>
+    <string name="text_tv_ingredient_weight">用料量</string>
+    <string name="text_tv_step_desc">这里是烘培步骤的详细描述</string>
+    <string name="text_tv_step_title">Step 1</string>
+    <string name="text_tv_head_ingredient">用料</string>
 </resources>

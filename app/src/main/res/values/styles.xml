@@ -10,4 +10,13 @@
         <item name="android:textColorPrimary">@android:color/black</item>
         <item name="android:textColorSecondary">@color/cardview_dark_background</item>
     </style>
+
+    <style name="ViewMarginTop">
+        <item name="android:layout_marginTop">@dimen/view_margin_top</item>
+    </style>
+
+    <style name="ViewPaddingLR">
+        <item name="android:paddingLeft">@dimen/view_padding_left</item>
+        <item name="android:paddingRight">@dimen/view_padding_right</item>
+    </style>
 </resources>

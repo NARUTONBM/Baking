@@ -11,24 +11,22 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_ingredients"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             android:titleTextAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:logo="@mipmap/ic_baking"
-            app:title="@string/app_name"
             app:titleTextColor="@android:color/white"/>
     </android.support.design.widget.AppBarLayout>
 
     <fragment
-        android:id="@+id/fragment_recipe"
+        android:id="@+id/fragment_ingredients"
         android:name="com.jellybean.baking.fragment.BakingFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.jellybean.baking.fragment.BakingFragment"
-        tools:layout="@layout/fragment_main"/>
+        tools:context="com.jellybean.baking.fragment.RecipeFragment"
+        tools:layout="@layout/fragment_recipe"/>
 </android.support.design.widget.CoordinatorLayout>

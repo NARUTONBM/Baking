@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_step_title"
+        style="@style/ViewMarginTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/text_tv_step_title"/>
+
+    <TextView
+        android:id="@+id/tv_step_desc"
+        style="@style/ViewMarginTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        app:layout_constraintTop_toBottomOf="@+id/tv_step_title"
+        tools:text="@string/text_tv_step_desc"/>
+
+    <ImageView
+        android:id="@+id/iv_splitter_step"
+        style="@style/ViewMarginTop"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:contentDescription="@string/desc_block_splitter"
+        android:src="@drawable/bg_line_rectangle_point_five"
+        app:layout_constraintTop_toBottomOf="@id/tv_step_desc"/>
+
+</android.support.constraint.ConstraintLayout>

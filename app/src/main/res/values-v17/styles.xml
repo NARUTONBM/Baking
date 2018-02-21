@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ViewPaddingLR">
+        <item name="android:paddingLeft">@dimen/view_padding_left</item>
+        <item name="android:paddingStart">@dimen/view_padding_left</item>
+        <item name="android:paddingRight">@dimen/view_padding_right</item>
+        <item name="android:paddingEnd">@dimen/view_padding_right</item>
+    </style>
+</resources>
